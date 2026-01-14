@@ -35,31 +35,60 @@ Built as part of the **HabotConnect — Python Backend Developer** hiring assign
 
 ## 🚀 Setup
 
-### 1. Clone Repository
+### Quick Start (Using Makefile)
+
+The easiest way to get started is using the provided Makefile:
+
+```bash
+# Clone repository
+git clone <repository-url>
+cd habot-employee-api
+
+# Setup virtual environment and install dependencies
+make setup
+
+# Run the server
+make run
+```
+
+### Manual Setup
+
+Alternatively, you can set up manually:
+
+#### 1. Clone Repository
 
 ```bash
 git clone <repository-url>
 cd habot-employee-api
 ```
 
-### 2. Create Virtual Environment
+#### 2. Create Virtual Environment
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Dependencies
+#### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the Server
+#### 4. Run the Server
 
 ```bash
 uvicorn app.main:app --reload
 ```
+
+### Available Makefile Commands
+
+| Command | Description |
+|---------|-------------|
+| `make setup` | Create virtual environment and install dependencies |
+| `make run` | Start the development server with auto-reload |
+| `make test` | Run the full test suite |
+| `make clean` | Remove virtual environment, database, and cache files |
 
 ---
 
@@ -202,6 +231,12 @@ GET /api/employees/?page=1&department=HR&role=Manager
 
 Run the full automated test suite:
 
+**Using Makefile (recommended):**
+```bash
+make test
+```
+
+**Or manually:**
 ```bash
 pytest
 ```
