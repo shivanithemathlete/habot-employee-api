@@ -1,15 +1,16 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from datetime import date
 from typing import Optional
 
 class EmployeeCreate(BaseModel):
-    name: str
+    name: str = Field(min_length=1)
     email: EmailStr
     department: Optional[str] = None
     role: Optional[str] = None
 
 class EmployeeUpdate(BaseModel):
-    name: Optional[str] = None
+    name: Optional[str] = Field(default=None, min_length=1)
+    email: Optional[EmailStr] = None
     department: Optional[str] = None
     role: Optional[str] = None
 
