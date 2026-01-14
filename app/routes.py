@@ -67,6 +67,27 @@ def get(
         raise HTTPException(status_code=404, detail="Employee not found")
     return emp
 
+@router.put("/{employee_id}", response_model=schemas.EmployeeOut)
+def update(
+    employee_id: int,
+    payload: schemas.EmployeeUpdate,
+    db: Session = Depends(get_db),
+    user: str = Depends(require_user),
+):
+    emp = crud.get_employee(db, employee_id)
+    if not emp:
+        raise HTTPException(status_code=404, detail="Employee not found")
+
+    data = payload.dict(exclude_unset=True)
+
+    # if email update is attempted
+    if "email" in data:
+        existing = crud.get_employee_by_email(db, data["email"])
+        if existing and existing.id != emp.id:
+            raise HTTPException(status_code=400, detail="Email already registered")
+
+    return crud.update_employee(db, emp, data)
+
 
 @router.delete("/{employee_id}", status_code=204)
 def delete(

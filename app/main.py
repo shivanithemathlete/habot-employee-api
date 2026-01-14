@@ -3,7 +3,7 @@ from .database import engine
 from .models import Base
 from .routes import router
 
-app = FastAPI(title="Employee Management API")
+app = FastAPI(title="HabotTech Employee Management API")
 
 Base.metadata.create_all(bind=engine)
 

@@ -22,6 +22,14 @@ def create_employee(db: Session, employee: schemas.EmployeeCreate):
     db.refresh(db_emp)
     return db_emp
 
+def update_employee(db: Session, emp, data):
+    for key, value in data.items():
+        setattr(emp, key, value)
+    db.commit()
+    db.refresh(emp)
+    return emp
+
+
 def delete_employee(db: Session, emp):
     db.delete(emp)
     db.commit()
